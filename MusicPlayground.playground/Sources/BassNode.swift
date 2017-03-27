@@ -9,7 +9,6 @@ public class BassNode: SoundNode {
                    size: CGSize(width: 60, height: 60))
         
         physicsBody = SKPhysicsBody (rectangleOf: size)
-        //physicsBody = SKPhysicsBody(circleOfRadius: size.width / 2)
         physicsBody?.restitution = 1.0
         physicsBody?.linearDamping = 0.0
         physicsBody?.categoryType = .bass

@@ -34,8 +34,8 @@ public class ControlBar:UIView {
     var speedLabel = UILabel()
     
     var playLabel = UILabel()
-    
-    var playState = true
+    var clearLabel = UILabel()
+    var tempoLabel = UILabel()
     
     
     
@@ -55,11 +55,6 @@ public class ControlBar:UIView {
         bassButton.layer.borderColor = UIColor.black.cgColor
         bassButton.layer.borderWidth = 2
         
-        self.addSubview(bassButton)
-        self.addSubview(leadButton)
-        self.addSubview(drumButton)
-        self.addSubview(barrierButton)
-        
         bassLabel = createLabel(title: "Bass", fontSize: 13, textColor: .white, x: 38, y: 5, width: 30, height: 18)
         leadLabel = createLabel(title: "Melody", fontSize: 13, textColor: .white, x: 89, y: 5, width: 45, height: 18)
         drumLabel = createLabel(title: "Drums", fontSize: 13, textColor: .white, x: 162, y: 5, width: 41, height: 18)
@@ -70,19 +65,12 @@ public class ControlBar:UIView {
         drumLabel.textAlignment = .center
         barrierLabel.textAlignment = .center
         
-        self.addSubview(bassLabel)
-        self.addSubview(leadLabel)
-        self.addSubview(drumLabel)
-        self.addSubview(barrierLabel)
-        
         
         let pauseImage = UIImage(named: "pause")
         playPause = createButton(title: "", backColor: .clear, radius: 0, titleColor: .clear, highlighted: .clear, x: 360, y: 7, width: 80, height: 80)
         playPause.setImage(pauseImage, for: .normal)
         playPause.addTarget(self, action: #selector(pausePlay), for: .touchDown)
-        self.addSubview(playPause)
-        playLabel = createLabel(title: "Playback", fontSize: 13, textColor: .white, x: 372, y: 5, width: 60, height: 18)
-        self.addSubview(playLabel)
+        playLabel = createLabel(title: "Playback", fontSize: 13, textColor: .white, x: 371, y: 5, width: 60, height: 18)
         
         let trashImage = UIImage(named: "clear")
         let trashHighlight = UIImage(named: "clearHighlight")
@@ -90,15 +78,21 @@ public class ControlBar:UIView {
         clearButton.setImage(trashImage, for: .normal)
         clearButton.setImage(trashHighlight, for: .highlighted)
         clearButton.addTarget(self, action: #selector(clearAll), for: .touchUpInside)
-        self.addSubview(clearButton)
+        clearLabel = createLabel(title: "Clear", fontSize: 13, textColor: .white, x: 435, y: 5, width: 40, height: 18)
         
         
-        tempoSlider.value = 0.5;
+        tempoSlider.maximumValue = 10.8
+        tempoSlider.minimumValue = 8.8
+        tempoSlider.value = 9.8
         tempoSlider.minimumTrackTintColor = UIColor.white
         tempoSlider.thumbTintColor = UIColor.black
         tempoSlider.frame = CGRect(x: 485, y: 30, width: 145, height: 31)
         tempoSlider.addTarget(self, action: #selector(changeTempo), for: .valueChanged)
-        self.addSubview(tempoSlider)
+        tempoLabel = createLabel(title: "Tempo", fontSize: 13, textColor: .white, x: 533, y: 5, width: 50, height: 18)
+        
+        
+        
+        self.addSubviews(bassButton, leadButton, drumButton, barrierButton, bassLabel, leadLabel, drumLabel, barrierLabel, playPause, playLabel, clearButton, clearLabel, tempoSlider, tempoLabel)
         
         
     
@@ -175,20 +169,9 @@ public class ControlBar:UIView {
     
     func pausePlay() {
         
-        if playState {
-            mainScene.isPaused = true
-            let playImage = UIImage(named: "play")
-            playPause.setImage(playImage, for: .normal)
-            playState = false
-        }
-        else
-        {
-            mainScene.isPaused = false
-            let pauseImage = UIImage(named: "pause")
-            playPause.setImage(pauseImage, for: .normal)
-            playState = true
-        }
-        
+        let image = UIImage(named: mainScene.isPaused ? "pause" : "play")!
+        mainScene.isPaused = !mainScene.isPaused
+        playPause.setImage(image, for: .normal)
         
     }
     

@@ -53,14 +53,7 @@ public class IntroView:UIView {
         circleImage = createImageView(image: oval, x: 291, y: 215, width: 58, height: 58)
         rectImage = createImageView(image: rect, x: 378, y: 226, width: 71, height: 36)
         
-        self.addSubview(musicLabel)
-        self.addSubview(playgroundLabel)
-        self.addSubview(creatorLabel)
-        self.addSubview(desc)
-        self.addSubview(instructions)
-        self.addSubview(squareImage)
-        self.addSubview(circleImage)
-        self.addSubview(rectImage)
+        self.addSubviews(musicLabel, playgroundLabel, creatorLabel, desc, instructions, squareImage, circleImage, rectImage)
         
         
     }

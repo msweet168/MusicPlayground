@@ -1,6 +1,12 @@
 import Foundation
 import SpriteKit
 
+extension UIView {
+    func addSubviews(_ views: UIView...) {
+       for view in views { addSubview(view) }
+    }
+}
+
 struct NodeType: OptionSet {
     let rawValue: UInt32
     static let scene = NodeType(rawValue: 1 << 0)
