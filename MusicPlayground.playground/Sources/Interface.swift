@@ -5,10 +5,9 @@ public class Interface: SKScene, SKPhysicsContactDelegate {
     
     
     public override func sceneDidLoad() {
-        size = CGSize(width: 640, height: 390)
+        size = CGSize(width: 640, height: 354)
         backgroundColor = .white
         setUpPhysics()
-        shapeType = ObjectType.bass
     }
     
     func setUpPhysics() {
@@ -19,6 +18,7 @@ public class Interface: SKScene, SKPhysicsContactDelegate {
         physicsBody = body
     }
 
+    
     public func didBegin(_ contact: SKPhysicsContact) {
         //if contact.bodyA.node is BarrierNode && contact.bodyB.node is SoundNode {
         //}
@@ -30,49 +30,58 @@ public class Interface: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    var shapeType:ObjectType?
+    var shapeType: ObjectType = .bass
+    
+    var path:UIBezierPath?
     
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         let touch = touches.first!
         let location = touch.location(in: self)
-        let existing = nodes(at: location)
         
+        if shapeType == .barrier {
+            
+            path = UIBezierPath()
+            path?.lineWidth = 20.0
+            path?.lineCapStyle = .round
+            path?.move(to: location)
+            
+            return
+        }
+        
+        
+        let existing = nodes(at: location)
         if existing.isEmpty {
             addObject(point: location)
         } else {
             removeChildren(in: existing)
         }
-
+        
+    }
+    
+    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let path = path {
+            let touch = touches.first!
+            let location = touch.location(in: self)
+            path.addLine(to: location)
+            let node = BarrierNode(path: path)
+            addChild(node)
+            self.path = nil
+        }
     }
     
     func addObject(point: CGPoint) {
-        
-        var node:SKSpriteNode!
-        
-        if shapeType == ObjectType.bass {
+        let node: SKSpriteNode
+
+        switch shapeType {
+        case .bass:
             node = BassNode()
-        }
-        else if shapeType == ObjectType.lead {
+        case .lead:
             node = LeadNode()
-        }
-        else if shapeType == ObjectType.drums {
+        case .drums:
             node = DrumsNode()
-        }
-        else if shapeType == ObjectType.barrier {
-            
-            //Place barrier node on scene.
-            
-            //node = BarrierNode()
-            print("Barrier node clicked.")
-            
-            //Temporory to prevent crashes:
-            node = BassNode()
-        }
-        else
-        {
-            print("Error: Node not set, inserting bass node by default.")
-            node = BassNode()
+        case .barrier:
+            fatalError("This shouldn't happen")
         }
         
         node.position = point

@@ -17,8 +17,6 @@ public class ControlBar:UIView {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    var hideButton = UIButton()
     
     var bassButton = UIButton()
     var leadButton = UIButton()
@@ -39,33 +37,29 @@ public class ControlBar:UIView {
     
     func viewSetup() {
         
-        hideButton = createButton(title: "Hide", backColor: UIColor(red: 216/255, green: 216/255, blue: 216/255, alpha: 1), radius: 7, titleColor: .black, highlighted: .gray, x: 7, y: 12, width: 42, height: 66)
-        bassButton = createButton(title: "", backColor: UIColor(red: 208/255, green: 2/255, blue: 27/255, alpha: 1), radius: 10, titleColor: UIColor.clear, highlighted: UIColor.clear, x: 60, y: 28, width: 45, height: 45)
-        leadButton = createButton(title: "", backColor: UIColor(red: 245/255, green: 166/255, blue: 35/255, alpha: 1), radius: 22, titleColor: UIColor.clear, highlighted: UIColor.clear, x: 118, y: 28, width: 45, height: 45)
-        drumButton = createButton(title: "", backColor: UIColor(red: 138/255, green: 6/255, blue: 165/255, alpha: 1), radius: 10, titleColor: UIColor.clear, highlighted: UIColor.clear, x: 178, y: 32, width: 71, height: 36)
-        barrierButton = createButton(title: "", backColor: UIColor.black, radius: 10, titleColor: UIColor.clear, highlighted: UIColor.clear, x: 266, y: 44, width: 108, height: 10)
+        bassButton = createButton(title: "", backColor: UIColor(red: 208/255, green: 2/255, blue: 27/255, alpha: 1), radius: 10, titleColor: UIColor.clear, highlighted: UIColor.clear, x: 30, y: 28, width: 45, height: 45)
+        leadButton = createButton(title: "", backColor: UIColor(red: 245/255, green: 166/255, blue: 35/255, alpha: 1), radius: 22, titleColor: UIColor.clear, highlighted: UIColor.clear, x: 88, y: 28, width: 45, height: 45)
+        drumButton = createButton(title: "", backColor: UIColor(red: 138/255, green: 6/255, blue: 165/255, alpha: 1), radius: 10, titleColor: UIColor.clear, highlighted: UIColor.clear, x: 148, y: 32, width: 71, height: 36)
+        barrierButton = createButton(title: "", backColor: UIColor.black, radius: 5, titleColor: UIColor.clear, highlighted: UIColor.clear, x: 246, y: 44, width: 108, height: 10)
         
-        hideButton.addTarget(self, action: #selector(hideControls), for: .touchUpInside)
         bassButton.addTarget(self, action: #selector(setBass), for: .touchUpInside)
         leadButton.addTarget(self, action: #selector(setLead), for: .touchUpInside)
         drumButton.addTarget(self, action: #selector(setDrum), for: .touchUpInside)
         barrierButton.addTarget(self, action: #selector(setBarrier), for: .touchUpInside)
         
-        hideButton.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         
         bassButton.layer.borderColor = UIColor.black.cgColor
         bassButton.layer.borderWidth = 2
         
-        self.addSubview(hideButton)
         self.addSubview(bassButton)
         self.addSubview(leadButton)
         self.addSubview(drumButton)
-        self.addSubview(barrierLabel)
+        self.addSubview(barrierButton)
         
-        bassLabel = createLabel(title: "Bass", fontSize: 13, textColor: .white, x: 68, y: 5, width: 30, height: 18)
-        leadLabel = createLabel(title: "Lead", fontSize: 13, textColor: .white, x: 126, y: 5, width: 30, height: 18)
-        drumLabel = createLabel(title: "Drums", fontSize: 13, textColor: .white, x: 192, y: 5, width: 41, height: 18)
-        barrierLabel = createLabel(title: "Barrier", fontSize: 13, textColor: .white, x: 299, y: 5, width: 43, height: 18)
+        bassLabel = createLabel(title: "Bass", fontSize: 13, textColor: .white, x: 38, y: 5, width: 30, height: 18)
+        leadLabel = createLabel(title: "Lead", fontSize: 13, textColor: .white, x: 96, y: 5, width: 30, height: 18)
+        drumLabel = createLabel(title: "Drums", fontSize: 13, textColor: .white, x: 162, y: 5, width: 41, height: 18)
+        barrierLabel = createLabel(title: "Barrier", fontSize: 13, textColor: .white, x: 269, y: 5, width: 43, height: 18)
         
         bassLabel.textAlignment = .center
         leadLabel.textAlignment = .center
@@ -75,7 +69,7 @@ public class ControlBar:UIView {
         self.addSubview(bassLabel)
         self.addSubview(leadLabel)
         self.addSubview(drumLabel)
-        //Add Barrier Label
+        self.addSubview(barrierLabel)
         
         
         //Create slider
@@ -113,28 +107,24 @@ public class ControlBar:UIView {
         return label
         
     }
-    
-    func hideControls() {
         
-    }
-    
     func setBass() {
-        mainScene.shapeType = ObjectType.bass
+        mainScene.shapeType = .bass
         setBorder(button: bassButton)
     }
     
     func setLead() {
-        mainScene.shapeType = ObjectType.lead
+        mainScene.shapeType = .lead
         setBorder(button: leadButton)
     }
     
     func setDrum() {
-        mainScene.shapeType = ObjectType.drums
+        mainScene.shapeType = .drums
         setBorder(button: drumButton)
     }
     
     func setBarrier() {
-        mainScene.shapeType = ObjectType.barrier
+        mainScene.shapeType = .barrier
         setBorder(button: barrierButton)
     }
     
@@ -146,7 +136,7 @@ public class ControlBar:UIView {
         barrierButton.layer.borderWidth = 0
         
         if button == barrierButton {
-            button.layer.borderWidth = 2
+            button.layer.borderWidth = 1
             button.layer.borderColor = UIColor.white.cgColor
         }
         else

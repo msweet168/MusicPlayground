@@ -11,11 +11,17 @@ import UIKit
 import PlaygroundSupport
 import SpriteKit
 
+
 var scene = Interface()
 
-var view = SKView(frame: CGRect(x: 0, y: 0, width: 640, height: 480))
+var view = UIView()
+view.frame = CGRect(x: 0, y: 0, width: 640, height: 480)
 view.backgroundColor = .white
-view.presentScene(scene)
+
+var skView = SKView(frame: CGRect(x: 0, y: 36, width: 640, height: 354))
+skView.backgroundColor = .white
+skView.presentScene(scene)
+view.addSubview(skView)
 
 var titleView = TitleBar()
 view.addSubview(titleView)
@@ -26,11 +32,13 @@ view.addSubview(controls)
 var intro = IntroView()
 view.addSubview(intro)
 
+
+
 //:Set these to "true" if you want to see SpriteKit values.
-view.showsFPS = true
-view.showsFields = true
-view.showsPhysics = true
-view.showsNodeCount = true
+skView.showsFPS = true
+skView.showsPhysics = false
+skView.showsNodeCount = true
+
 
 
 PlaygroundPage.current.liveView = view

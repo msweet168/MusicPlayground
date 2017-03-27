@@ -84,7 +84,6 @@ public class IntroView:UIView {
         imageView.frame = CGRect(x: x, y: y, width: width, height: height)
         
         return imageView
-        
     }
     
     
@@ -92,7 +91,7 @@ public class IntroView:UIView {
 
         UIView.animate(withDuration: 0.5, animations: {
             self.alpha = 0
-        })
+        }, completion: { _ in self.removeFromSuperview() })
         
     }
 

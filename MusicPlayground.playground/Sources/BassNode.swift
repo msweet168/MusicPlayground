@@ -21,8 +21,13 @@ public class BassNode: SoundNode {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     override var soundFileName: String {
         return "Bing"
+    }
+    
+    override var hitTextureName: String {
+        return "SquareHit"
     }
     
 }

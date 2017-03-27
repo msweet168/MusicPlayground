@@ -23,7 +23,10 @@ public class DrumsNode:SoundNode {
     override var soundFileName: String {
         return "Bing"
     }
-
+    
+    override var hitTextureName: String {
+        return "RectangleHit"
+    }
     
 }
 

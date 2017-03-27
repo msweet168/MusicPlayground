@@ -24,7 +24,9 @@ public class LeadNode:SoundNode {
         return "Bing"
     }
 
-    
+    override var hitTextureName: String {
+        return "OvalHit"
+    }
     
 }
 

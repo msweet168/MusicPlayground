@@ -10,15 +10,20 @@ struct NodeType: OptionSet {
     static let barrier = NodeType(rawValue: 1 << 4)
 }
 
+/// Support on SKPhysicsBody for option-set based bitmasks
+/// to replace the bug-prone integer bitmasks.
 extension SKPhysicsBody {
+    /// The "category" of this node.
     var categoryType: NodeType {
         get { return NodeType(rawValue: categoryBitMask) }
         set { categoryBitMask = newValue.rawValue }
     }
+    /// The categories of nodes that will cause a collision with this node.
     var collisionType: NodeType {
         get { return NodeType(rawValue: collisionBitMask) }
         set { collisionBitMask = newValue.rawValue }
     }
+    /// The categories of nodes that will cause a call to didBegin/didEndContact.
     var contactTestType: NodeType {
         get { return NodeType(rawValue: contactTestBitMask) }
         set { contactTestBitMask = newValue.rawValue }
