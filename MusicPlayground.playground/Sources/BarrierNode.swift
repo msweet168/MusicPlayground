@@ -12,7 +12,7 @@ public class BarrierNode: SKShapeNode {
         
         // TODO: Make this work with the line width
         physicsBody = SKPhysicsBody(edgeLoopFrom: path.cgPath)
-        physicsBody?.restitution = 0.0
+        physicsBody?.restitution = 1.0
         physicsBody?.linearDamping = 0.0
         physicsBody?.pinned = true
         physicsBody?.categoryType = .barrier

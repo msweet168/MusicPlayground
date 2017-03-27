@@ -31,7 +31,7 @@ public class IntroView:UIView {
         musicLabel = createLabel(title: "Music", fontSize: 35, textColor: .white, x: 187, y: 31, width: 100, height: 47)
         playgroundLabel = createLabel(title: "Playground", fontSize: 50, textColor: .white, x: 186, y: 57, width: 268, height: 69)
         creatorLabel = createLabel(title: "by Mitchell Sweet", fontSize: 15, textColor: .white, x: 329, y: 115, width: 125, height: 20)
-        desc = createLabel(title: "Squares are bass, circles are lead,\nrectangles are drums", fontSize: 15, textColor: .white, x: 200, y: 159, width: 260, height: 40)
+        desc = createLabel(title: "Squares are bass, circles are melody,\nrectangles are drums", fontSize: 15, textColor: .white, x: 200, y: 159, width: 270, height: 40)
         instructions = createLabel(title: instructionsString, fontSize: 15, textColor: .white, x: 87, y: 289, width: 467, height: 160)
         
         musicLabel.textAlignment = .left

@@ -25,7 +25,7 @@ public class ControlBar:UIView {
     var playPause = UIButton()
     var clearButton = UIButton()
     
-    var speedSlider = UISlider()
+    var tempoSlider = UISlider()
     
     var bassLabel = UILabel()
     var leadLabel = UILabel()
@@ -61,7 +61,7 @@ public class ControlBar:UIView {
         self.addSubview(barrierButton)
         
         bassLabel = createLabel(title: "Bass", fontSize: 13, textColor: .white, x: 38, y: 5, width: 30, height: 18)
-        leadLabel = createLabel(title: "Lead", fontSize: 13, textColor: .white, x: 96, y: 5, width: 30, height: 18)
+        leadLabel = createLabel(title: "Melody", fontSize: 13, textColor: .white, x: 89, y: 5, width: 45, height: 18)
         drumLabel = createLabel(title: "Drums", fontSize: 13, textColor: .white, x: 162, y: 5, width: 41, height: 18)
         barrierLabel = createLabel(title: "Barrier", fontSize: 13, textColor: .white, x: 278, y: 5, width: 43, height: 18)
         
@@ -79,16 +79,26 @@ public class ControlBar:UIView {
         let pauseImage = UIImage(named: "pause")
         playPause = createButton(title: "", backColor: .clear, radius: 0, titleColor: .clear, highlighted: .clear, x: 360, y: 7, width: 80, height: 80)
         playPause.setImage(pauseImage, for: .normal)
-        playPause.addTarget(self, action: #selector(pausePlay), for: .touchUpInside)
+        playPause.addTarget(self, action: #selector(pausePlay), for: .touchDown)
         self.addSubview(playPause)
         playLabel = createLabel(title: "Playback", fontSize: 13, textColor: .white, x: 372, y: 5, width: 60, height: 18)
         self.addSubview(playLabel)
         
+        let trashImage = UIImage(named: "clear")
+        let trashHighlight = UIImage(named: "clearHighlight")
+        clearButton = createButton(title: "", backColor: .clear, radius: 0, titleColor: .clear, highlighted: .clear, x: 435, y: 28, width: 37, height: 37)
+        clearButton.setImage(trashImage, for: .normal)
+        clearButton.setImage(trashHighlight, for: .highlighted)
+        clearButton.addTarget(self, action: #selector(clearAll), for: .touchUpInside)
+        self.addSubview(clearButton)
         
         
-        
-        //Create slider
-        //Create clear button
+        tempoSlider.value = 0.5;
+        tempoSlider.minimumTrackTintColor = UIColor.white
+        tempoSlider.thumbTintColor = UIColor.black
+        tempoSlider.frame = CGRect(x: 485, y: 30, width: 145, height: 31)
+        tempoSlider.addTarget(self, action: #selector(changeTempo), for: .valueChanged)
+        self.addSubview(tempoSlider)
         
         
     
@@ -179,6 +189,14 @@ public class ControlBar:UIView {
             playState = true
         }
         
+        
+    }
+    
+    func clearAll() {
+        mainScene.removeAllChildren()
+    }
+    
+    func changeTempo() {
         
     }
 
