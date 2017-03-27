@@ -33,6 +33,10 @@ public class ControlBar:UIView {
     var barrierLabel = UILabel()
     var speedLabel = UILabel()
     
+    var playLabel = UILabel()
+    
+    var playState = true
+    
     
     
     func viewSetup() {
@@ -59,7 +63,7 @@ public class ControlBar:UIView {
         bassLabel = createLabel(title: "Bass", fontSize: 13, textColor: .white, x: 38, y: 5, width: 30, height: 18)
         leadLabel = createLabel(title: "Lead", fontSize: 13, textColor: .white, x: 96, y: 5, width: 30, height: 18)
         drumLabel = createLabel(title: "Drums", fontSize: 13, textColor: .white, x: 162, y: 5, width: 41, height: 18)
-        barrierLabel = createLabel(title: "Barrier", fontSize: 13, textColor: .white, x: 269, y: 5, width: 43, height: 18)
+        barrierLabel = createLabel(title: "Barrier", fontSize: 13, textColor: .white, x: 278, y: 5, width: 43, height: 18)
         
         bassLabel.textAlignment = .center
         leadLabel.textAlignment = .center
@@ -72,8 +76,18 @@ public class ControlBar:UIView {
         self.addSubview(barrierLabel)
         
         
+        let pauseImage = UIImage(named: "pause")
+        playPause = createButton(title: "", backColor: .clear, radius: 0, titleColor: .clear, highlighted: .clear, x: 360, y: 7, width: 80, height: 80)
+        playPause.setImage(pauseImage, for: .normal)
+        playPause.addTarget(self, action: #selector(pausePlay), for: .touchUpInside)
+        self.addSubview(playPause)
+        playLabel = createLabel(title: "Playback", fontSize: 13, textColor: .white, x: 372, y: 5, width: 60, height: 18)
+        self.addSubview(playLabel)
+        
+        
+        
+        
         //Create slider
-        //Create pause/play button
         //Create clear button
         
         
@@ -145,6 +159,25 @@ public class ControlBar:UIView {
             button.layer.borderColor = UIColor.black.cgColor
         }
         
+        
+        
+    }
+    
+    func pausePlay() {
+        
+        if playState {
+            mainScene.isPaused = true
+            let playImage = UIImage(named: "play")
+            playPause.setImage(playImage, for: .normal)
+            playState = false
+        }
+        else
+        {
+            mainScene.isPaused = false
+            let pauseImage = UIImage(named: "pause")
+            playPause.setImage(pauseImage, for: .normal)
+            playState = true
+        }
         
         
     }

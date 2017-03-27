@@ -26,12 +26,12 @@ public class IntroView:UIView {
     
     func viewSetup() {
         
-        let instructionsString = "Select a shape and tap on the playground to add it.\nSelect a barrier and drag a line where you want it.\nEvery time a shape hits the walls or a barrier, it will play its sound.\nUse the slider to control tempo.\n\nWhat can you create?\n\n(Tap anywhere to continue)"
+        let instructionsString = "Select a shape and tap on the playground to add it.\nSelect barrier and drag a line where you want it.\nEvery time a shape hits the walls or a barrier, it will play its sound.\nUse the slider to control tempo.\n\nWhat can you create?\n\n(Tap anywhere to continue)"
         
         musicLabel = createLabel(title: "Music", fontSize: 35, textColor: .white, x: 187, y: 31, width: 100, height: 47)
         playgroundLabel = createLabel(title: "Playground", fontSize: 50, textColor: .white, x: 186, y: 57, width: 268, height: 69)
         creatorLabel = createLabel(title: "by Mitchell Sweet", fontSize: 15, textColor: .white, x: 329, y: 115, width: 125, height: 20)
-        desc = createLabel(title: "Squares are bass, circles are lead,\nrectangles are drums", fontSize: 15, textColor: .white, x: 203, y: 159, width: 260, height: 40)
+        desc = createLabel(title: "Squares are bass, circles are lead,\nrectangles are drums", fontSize: 15, textColor: .white, x: 200, y: 159, width: 260, height: 40)
         instructions = createLabel(title: instructionsString, fontSize: 15, textColor: .white, x: 87, y: 289, width: 467, height: 160)
         
         musicLabel.textAlignment = .left

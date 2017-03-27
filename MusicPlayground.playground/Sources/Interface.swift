@@ -15,6 +15,8 @@ public class Interface: SKScene, SKPhysicsContactDelegate {
         body.categoryType = .scene
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
+        physicsBody?.restitution = 0
+        physicsBody?.linearDamping = 0.0
         physicsBody = body
     }
 
@@ -34,6 +36,8 @@ public class Interface: SKScene, SKPhysicsContactDelegate {
     
     var path:UIBezierPath?
     
+    
+    //FIXME: Barriers will disappear if the rectangle around them is touched. This must be limited to the line itself. 
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         let touch = touches.first!
