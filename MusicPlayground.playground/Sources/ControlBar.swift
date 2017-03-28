@@ -81,9 +81,9 @@ public class ControlBar:UIView {
         clearLabel = createLabel(title: "Clear", fontSize: 13, textColor: .white, x: 435, y: 5, width: 40, height: 18)
         
         
-        tempoSlider.maximumValue = 10.8
-        tempoSlider.minimumValue = 8.8
-        tempoSlider.value = 9.8
+        tempoSlider.maximumValue = 1
+        tempoSlider.minimumValue = 0.1
+        tempoSlider.value = 0.5
         tempoSlider.minimumTrackTintColor = UIColor.white
         tempoSlider.thumbTintColor = UIColor.black
         tempoSlider.frame = CGRect(x: 485, y: 30, width: 145, height: 31)
@@ -181,6 +181,9 @@ public class ControlBar:UIView {
     
     func changeTempo() {
         
+        print("\(mainScene.speed)")
+        
+        //mainScene.speed = CGFloat(tempoSlider.value)
     }
 
     
