@@ -24,6 +24,7 @@ public class ControlBar:UIView {
     var barrierButton = UIButton()
     var playPause = UIButton()
     var clearButton = UIButton()
+    var resetTempo = UIButton()
     
     var tempoSlider = UISlider()
     
@@ -67,10 +68,12 @@ public class ControlBar:UIView {
         
         
         let pauseImage = UIImage(named: "pause")
-        playPause = createButton(title: "", backColor: .clear, radius: 0, titleColor: .clear, highlighted: .clear, x: 360, y: 7, width: 80, height: 80)
+        let pauseHighlight = UIImage(named: "pauseHighlight")
+        playPause = createButton(title: "", backColor: .clear, radius: 0, titleColor: .clear, highlighted: .clear, x: 374, y: 28, width: 37, height: 37)
         playPause.setImage(pauseImage, for: .normal)
-        playPause.addTarget(self, action: #selector(pausePlay), for: .touchDown)
-        playLabel = createLabel(title: "Playback", fontSize: 13, textColor: .white, x: 371, y: 5, width: 60, height: 18)
+        playPause.setImage(pauseHighlight, for: .highlighted)
+        playPause.addTarget(self, action: #selector(pausePlay), for: .touchUpInside)
+        playLabel = createLabel(title: "Playback", fontSize: 13, textColor: .white, x: 363, y: 5, width: 60, height: 18)
         
         let trashImage = UIImage(named: "clear")
         let trashHighlight = UIImage(named: "clearHighlight")
@@ -81,18 +84,20 @@ public class ControlBar:UIView {
         clearLabel = createLabel(title: "Clear", fontSize: 13, textColor: .white, x: 435, y: 5, width: 40, height: 18)
         
         
-        tempoSlider.maximumValue = 1
+        tempoSlider.maximumValue = 2
         tempoSlider.minimumValue = 0.1
-        tempoSlider.value = 0.5
+        tempoSlider.value = 1
         tempoSlider.minimumTrackTintColor = UIColor.white
         tempoSlider.thumbTintColor = UIColor.black
         tempoSlider.frame = CGRect(x: 485, y: 30, width: 145, height: 31)
         tempoSlider.addTarget(self, action: #selector(changeTempo), for: .valueChanged)
         tempoLabel = createLabel(title: "Tempo", fontSize: 13, textColor: .white, x: 533, y: 5, width: 50, height: 18)
+        resetTempo = createButton(title: "Reset", backColor: .clear, radius: 0, titleColor: .white, highlighted: .gray, x: 530, y: 65, width: 50, height: 18)
+        resetTempo.addTarget(self, action: #selector(tempoReset), for: .touchUpInside)
         
         
         
-        self.addSubviews(bassButton, leadButton, drumButton, barrierButton, bassLabel, leadLabel, drumLabel, barrierLabel, playPause, playLabel, clearButton, clearLabel, tempoSlider, tempoLabel)
+        self.addSubviews(bassButton, leadButton, drumButton, barrierButton, bassLabel, leadLabel, drumLabel, barrierLabel, playPause, playLabel, clearButton, clearLabel, tempoSlider, tempoLabel, resetTempo)
         
         
     
@@ -163,15 +168,15 @@ public class ControlBar:UIView {
             button.layer.borderColor = UIColor.black.cgColor
         }
         
-        
-        
     }
     
     func pausePlay() {
         
         let image = UIImage(named: mainScene.isPaused ? "pause" : "play")!
+        let highlightImage = UIImage(named: mainScene.isPaused ? "pauseHighlight" : "playHighlight")
         mainScene.isPaused = !mainScene.isPaused
         playPause.setImage(image, for: .normal)
+        playPause.setImage(highlightImage, for: .highlighted)
         
     }
     
@@ -180,12 +185,13 @@ public class ControlBar:UIView {
     }
     
     func changeTempo() {
-        
-        print("\(mainScene.speed)")
-        
-        //mainScene.speed = CGFloat(tempoSlider.value)
+        mainScene.physicsWorld.speed = CGFloat(tempoSlider.value)
     }
-
+    
+    func tempoReset() {
+        tempoSlider.value = 1
+        mainScene.physicsWorld.speed = 1
+    }
     
 }
 
