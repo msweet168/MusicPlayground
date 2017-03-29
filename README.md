@@ -14,5 +14,8 @@ Circles are melody, squares are bass, and rectangles are drums. Select a shape, 
 
 Music Playground was created with SpriteKit. User Interface elements were created with UIKit. Graphics were created with Sketch.
 
+## Permission: 
+
+Feel free to download the source from this repo and make pull requests to make Music Playground better. However, please do not post the project anywhere else without permission from and giving credit to Mitchell Sweet.
 
 Copyright © 2017 Mitchell Sweet
