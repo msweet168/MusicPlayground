@@ -22,14 +22,28 @@ public class Interface: SKScene, SKPhysicsContactDelegate {
 
     
     public func didBegin(_ contact: SKPhysicsContact) {
-        //if contact.bodyA.node is BarrierNode && contact.bodyB.node is SoundNode {
-        //}
-        if let soundNode = contact.bodyA.node as? SoundNode {
-            soundNode.playSound()
+
+        let barrierNode = (contact.bodyA.node as? BarrierNode) ?? (contact.bodyB.node as? BarrierNode)
+        let soundNode = (contact.bodyA.node as? SoundNode) ?? (contact.bodyB.node as? SoundNode)
+        
+        if barrierNode != nil {
+            print("Barrier")
+            soundNode?.playSound(octave: .medium)
+            
         }
-        if let soundNode = contact.bodyB.node as? SoundNode {
-            soundNode.playSound()
+        else if let sound = soundNode {
+            if sound.position.x <= 213 {
+                sound.playSound(octave: .low)
+            }
+            else if (sound.position.x > 213) && (sound.position.x <= 426) {
+                sound.playSound(octave: .medium)
+            }
+            else {
+                sound.playSound(octave: .high)
+            }
+
         }
+        
     }
     
     var shapeType: ObjectType = .bass
@@ -63,6 +77,7 @@ public class Interface: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let path = path {
             let touch = touches.first!
@@ -73,6 +88,7 @@ public class Interface: SKScene, SKPhysicsContactDelegate {
             self.path = nil
         }
     }
+    
     
     func addObject(point: CGPoint) {
         let node: SKSpriteNode

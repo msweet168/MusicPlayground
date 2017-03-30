@@ -21,7 +21,7 @@ public class DrumsNode:SoundNode {
     }
     
     override var soundFileName: String {
-        return "Bing"
+        return "Drums"
     }
     
     override var hitTextureName: String {

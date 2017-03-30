@@ -100,7 +100,7 @@ public class ControlBar:UIView {
         self.addSubviews(bassButton, leadButton, drumButton, barrierButton, bassLabel, leadLabel, drumLabel, barrierLabel, playPause, playLabel, clearButton, clearLabel, tempoSlider, tempoLabel, resetTempo)
         
         
-    
+        
     }
     
     
@@ -130,7 +130,7 @@ public class ControlBar:UIView {
         return label
         
     }
-        
+    
     func setBass() {
         mainScene.shapeType = .bass
         setBorder(button: bassButton)

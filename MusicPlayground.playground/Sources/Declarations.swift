@@ -42,3 +42,9 @@ enum ObjectType {
     case drums
     case barrier
 }
+
+enum SoundModifier {
+    case high
+    case medium
+    case low
+}

@@ -21,7 +21,7 @@ public class LeadNode:SoundNode {
     }
     
     override var soundFileName: String {
-        return "Bing"
+        return "Lead"
     }
 
     override var hitTextureName: String {

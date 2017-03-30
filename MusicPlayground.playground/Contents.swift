@@ -23,11 +23,11 @@ skView.backgroundColor = .white
 skView.presentScene(scene)
 view.addSubview(skView)
 
-var titleView = TitleBar()
-view.addSubview(titleView)
-
 var controls = ControlBar(scene: scene)
 view.addSubview(controls)
+
+var titleView = TitleBar()
+view.addSubview(titleView)
 
 var intro = IntroView()
 view.addSubview(intro)
@@ -36,9 +36,9 @@ view.addSubview(intro)
 
 
 //:Set these to "true" if you want to see SpriteKit values.
-skView.showsFPS = true
+skView.showsFPS = false
 skView.showsPhysics = false
-skView.showsNodeCount = true
+skView.showsNodeCount = false
 
 
 
