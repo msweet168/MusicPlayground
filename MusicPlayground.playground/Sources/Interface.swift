@@ -7,6 +7,7 @@ public class Interface: SKScene, SKPhysicsContactDelegate {
     public override func sceneDidLoad() {
         size = CGSize(width: 640, height: 354)
         backgroundColor = .white
+        
         setUpPhysics()
     }
     
@@ -27,7 +28,6 @@ public class Interface: SKScene, SKPhysicsContactDelegate {
         let soundNode = (contact.bodyA.node as? SoundNode) ?? (contact.bodyB.node as? SoundNode)
         
         if barrierNode != nil {
-            print("Barrier")
             soundNode?.playSound(octave: .medium)
             
         }

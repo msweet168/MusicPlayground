@@ -22,7 +22,7 @@ public class TitleBar:UIView {
         titleLabel.text = "Music Playground"
         titleLabel.font = UIFont(name: "Chalkboard SE", size: 20)
         titleLabel.textColor = UIColor.white
-        titleLabel.frame = CGRect(x: 237, y: 6, width: 200, height: 27)
+        titleLabel.frame = CGRect(x: 235, y: 0, width: 170, height: 29)
         self.addSubview(titleLabel)
         
         let infoImage = UIImage(named: "info")

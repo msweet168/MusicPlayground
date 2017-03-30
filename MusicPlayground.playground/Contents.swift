@@ -33,8 +33,6 @@ var intro = IntroView()
 view.addSubview(intro)
 
 
-
-
 //:Set these to "true" if you want to see SpriteKit values.
 skView.showsFPS = false
 skView.showsPhysics = false
