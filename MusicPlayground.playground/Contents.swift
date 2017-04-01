@@ -7,6 +7,9 @@
 //: Control the speed with the slider. Wanna start over, just tap "clear".
 //: What awesome beats can you make?
 
+
+//: README: Hello! Since I do not own an iPad, this playground is made for Xcode and had only been tested on a mac. Please run it in Xcode because that is where you will have the best experience. Thank you :)
+
 import UIKit
 import PlaygroundSupport
 import SpriteKit

@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 
-public class TitleBar:UIView {
+public class TitleBar: UIView {
     
     public init() {
         super.init(frame:CGRect(x:0, y:0, width:640, height:36))

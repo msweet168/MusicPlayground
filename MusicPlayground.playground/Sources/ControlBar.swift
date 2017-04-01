@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-public class ControlBar:UIView {
+public class ControlBar: UIView {
     
     var mainScene = Interface()
     
