@@ -1,9 +1,10 @@
 import Foundation
 import UIKit
 
-
+/// UIView which appears at the top of the playground and holds the name and info button.
 public class TitleBar: UIView {
     
+    // Initalizes view with size and background color.
     public init() {
         super.init(frame:CGRect(x:0, y:0, width:640, height:36))
         backgroundColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 0.68)
@@ -15,9 +16,13 @@ public class TitleBar: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Creates a property for IntroView.
+    public var intro = IntroView()
     
+    /// Function called by initalizer which sets up subviews in TitleBar.
     func viewSetup() {
         
+        // Create title label.
         let titleLabel = UILabel()
         titleLabel.text = "Music Playground"
         titleLabel.font = UIFont(name: "Chalkboard SE", size: 20)
@@ -25,6 +30,7 @@ public class TitleBar: UIView {
         titleLabel.frame = CGRect(x: 235, y: 0, width: 170, height: 29)
         self.addSubview(titleLabel)
         
+        // Create info button.
         let infoImage = UIImage(named: "info")
         let infoHighlight = UIImage(named: "infoHighlight")
         let infoButton = UIButton()
@@ -37,14 +43,12 @@ public class TitleBar: UIView {
         
     }
     
+    /// Function which sets IntroView's alpha to 1 so it is visable.
     func infoScreen() {
-        let info = IntroView()
-        self.frame = CGRect(x: 0, y: 0, width: 640, height: 480)
-        self.addSubview(info)
+        UIView.animate(withDuration: 0.5, animations: {
+            self.intro.alpha = 1
+        })
     }
     
-    public override func willRemoveSubview(_ subview: UIView) {
-        self.frame = CGRect(x: 0, y: 0, width: 640, height: 36)
-    }
     
 }

@@ -14,7 +14,6 @@ import UIKit
 import PlaygroundSupport
 import SpriteKit
 
-
 var scene = Interface()
 
 var view = UIView()
@@ -32,8 +31,7 @@ view.addSubview(controls)
 var titleView = TitleBar()
 view.addSubview(titleView)
 
-var intro = IntroView()
-view.addSubview(intro)
+view.addSubview(titleView.intro)
 
 
 //:Set these to "true" if you want to see SpriteKit values.
