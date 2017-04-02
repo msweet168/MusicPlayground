@@ -1,12 +1,14 @@
 import Foundation
 import SpriteKit
 
+/// Allows for multiple subviews to be added to the UIView in one statement.
 extension UIView {
     func addSubviews(_ views: UIView...) {
        for view in views { addSubview(view) }
     }
 }
 
+/// Lists categories for different types of nodes.
 struct NodeType: OptionSet {
     let rawValue: UInt32
     static let scene = NodeType(rawValue: 1 << 0)
@@ -36,6 +38,7 @@ extension SKPhysicsBody {
     }
 }
 
+/// Describes the node currently selected.
 enum ObjectType {
     case bass
     case lead
@@ -43,6 +46,7 @@ enum ObjectType {
     case barrier
 }
 
+/// Describes different octaves which nodes can play sounds at. 
 enum SoundModifier {
     case high
     case medium

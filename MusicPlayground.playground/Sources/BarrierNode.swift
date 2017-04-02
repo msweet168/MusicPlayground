@@ -1,16 +1,18 @@
 import Foundation
 import SpriteKit
 
-
+/// BarrierNodes are added to manipulate shape nodes within the playground. 
 public class BarrierNode: SKShapeNode {
     
     init(path: UIBezierPath) {
         super.init()
         self.path = path.cgPath
+        
+        // Sets the appearence of each barrier.
         strokeColor = .black
         lineWidth = 10.0
         
-        // TODO: Make this work with the line width
+        // physicsbody settings of each barrier. 
         physicsBody = SKPhysicsBody(edgeLoopFrom: path.cgPath)
         physicsBody?.restitution = 0.5
         physicsBody?.linearDamping = 0.0

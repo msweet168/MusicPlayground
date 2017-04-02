@@ -1,10 +1,13 @@
 import Foundation
 import UIKit
 
+/// UIView at the bottom of the playground which allows the user to change settings and choose object to add to the scene. 
 public class ControlBar: UIView {
     
+    // Creates a new instance of Interface.
     var mainScene = Interface()
     
+    // Initalizes ControlBar view with size and color.
     public init(scene: Interface) {
         super.init(frame:CGRect(x:0, y:390, width:640, height:90))
         backgroundColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 0.68)
@@ -18,6 +21,7 @@ public class ControlBar: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Subview attributes.
     var bassButton = UIButton()
     var leadButton = UIButton()
     var drumButton = UIButton()
@@ -39,23 +43,26 @@ public class ControlBar: UIView {
     var tempoLabel = UILabel()
     
     
-    
+    /// Function called by initalizer which sets up subviews in ControlBar.
     func viewSetup() {
         
+        // Create buttons which add bass, lead, drum, and barrier nodes to the scene.
         bassButton = createButton(title: "", backColor: UIColor(red: 208/255, green: 2/255, blue: 27/255, alpha: 1), radius: 10, titleColor: UIColor.clear, highlighted: UIColor.clear, x: 30, y: 28, width: 45, height: 45)
         leadButton = createButton(title: "", backColor: UIColor(red: 245/255, green: 166/255, blue: 35/255, alpha: 1), radius: 22, titleColor: UIColor.clear, highlighted: UIColor.clear, x: 88, y: 28, width: 45, height: 45)
         drumButton = createButton(title: "", backColor: UIColor(red: 138/255, green: 6/255, blue: 165/255, alpha: 1), radius: 10, titleColor: UIColor.clear, highlighted: UIColor.clear, x: 148, y: 32, width: 71, height: 36)
         barrierButton = createButton(title: "", backColor: UIColor.black, radius: 5, titleColor: UIColor.clear, highlighted: UIColor.clear, x: 246, y: 44, width: 108, height: 10)
         
+        // Add functions to buttons.
         bassButton.addTarget(self, action: #selector(setBass), for: .touchUpInside)
         leadButton.addTarget(self, action: #selector(setLead), for: .touchUpInside)
         drumButton.addTarget(self, action: #selector(setDrum), for: .touchUpInside)
         barrierButton.addTarget(self, action: #selector(setBarrier), for: .touchUpInside)
         
-        
+        // Sets the bassButton to appear selected by default.
         bassButton.layer.borderColor = UIColor.black.cgColor
         bassButton.layer.borderWidth = 2
         
+        // Create labels for each button.
         bassLabel = createLabel(title: "Bass", fontSize: 13, textColor: .white, x: 38, y: 5, width: 30, height: 18)
         leadLabel = createLabel(title: "Melody", fontSize: 13, textColor: .white, x: 89, y: 5, width: 45, height: 18)
         drumLabel = createLabel(title: "Drums", fontSize: 13, textColor: .white, x: 162, y: 5, width: 41, height: 18)
@@ -66,7 +73,7 @@ public class ControlBar: UIView {
         drumLabel.textAlignment = .center
         barrierLabel.textAlignment = .center
         
-        
+        // Create pause/play button, clear button, and slider.
         let pauseImage = UIImage(named: "pause")
         let pauseHighlight = UIImage(named: "pauseHighlight")
         playPause = createButton(title: "", backColor: .clear, radius: 0, titleColor: .clear, highlighted: .clear, x: 374, y: 28, width: 37, height: 37)
@@ -96,7 +103,7 @@ public class ControlBar: UIView {
         resetTempo.addTarget(self, action: #selector(tempoReset), for: .touchUpInside)
         
         
-        
+        // Adds all subviews created via extension on UIView.
         self.addSubviews(bassButton, leadButton, drumButton, barrierButton, bassLabel, leadLabel, drumLabel, barrierLabel, playPause, playLabel, clearButton, clearLabel, tempoSlider, tempoLabel, resetTempo)
         
         
@@ -104,6 +111,7 @@ public class ControlBar: UIView {
     }
     
     
+    /// Function which takes in parameters for basic button attributes and returns a button object.
     func createButton(title: String, backColor: UIColor, radius: CGFloat, titleColor: UIColor, highlighted: UIColor, x: Double, y: Double, width: Double, height: Double) -> UIButton {
         
         let button = UIButton()
@@ -118,7 +126,7 @@ public class ControlBar: UIView {
         
     }
     
-    
+    /// Function which takes in parameters for basic label attributes and returns a label object.
     func createLabel(title: String, fontSize: CGFloat, textColor: UIColor, x: Double, y: Double, width: Double, height: Double) -> UILabel {
         
         let label = UILabel()
@@ -131,8 +139,11 @@ public class ControlBar: UIView {
         
     }
     
+    // Functions connected to four shape buttons to select with node to add to the scene.
     func setBass() {
+        // Sets shapeType enum
         mainScene.shapeType = .bass
+        // Sets the border of corrisponding to show that it is selected.
         setBorder(button: bassButton)
     }
     
@@ -151,6 +162,7 @@ public class ControlBar: UIView {
         setBorder(button: barrierButton)
     }
     
+    /// Sets border of button passed through its parameter to show that it is selected.
     func setBorder(button: UIButton) {
         
         bassButton.layer.borderWidth = 0
@@ -170,6 +182,7 @@ public class ControlBar: UIView {
         
     }
     
+    /// Checks if the mainScene is in a paused or play state and sets it appropriately.
     func pausePlay() {
         
         let image = UIImage(named: mainScene.isPaused ? "pause" : "play")!
@@ -180,14 +193,17 @@ public class ControlBar: UIView {
         
     }
     
+    /// Removes all nodes from mainScene.
     func clearAll() {
         mainScene.removeAllChildren()
     }
     
+    /// Called each time the tempo slider's value is changed, this function changes the speed of mainScene.
     func changeTempo() {
         mainScene.physicsWorld.speed = CGFloat(tempoSlider.value)
     }
     
+    /// Resets mainScene's speed to its defaut state. 
     func tempoReset() {
         tempoSlider.value = 1
         mainScene.physicsWorld.speed = 1
