@@ -46,6 +46,7 @@ public class ControlBar: UIView {
     /// Function called by initalizer which sets up subviews in ControlBar.
     func viewSetup() {
         
+        
         // Create buttons which add bass, lead, drum, and barrier nodes to the scene.
         bassButton = createButton(title: "", backColor: UIColor(red: 208/255, green: 2/255, blue: 27/255, alpha: 1), radius: 10, titleColor: UIColor.clear, highlighted: UIColor.clear, x: 30, y: 28, width: 45, height: 45)
         leadButton = createButton(title: "", backColor: UIColor(red: 245/255, green: 166/255, blue: 35/255, alpha: 1), radius: 22, titleColor: UIColor.clear, highlighted: UIColor.clear, x: 88, y: 28, width: 45, height: 45)
@@ -140,24 +141,24 @@ public class ControlBar: UIView {
     }
     
     // Functions connected to four shape buttons to select with node to add to the scene.
-    func setBass() {
+    @objc func setBass() {
         // Sets shapeType enum
         mainScene.shapeType = .bass
         // Sets the border of corrisponding to show that it is selected.
         setBorder(button: bassButton)
     }
     
-    func setLead() {
+    @objc func setLead() {
         mainScene.shapeType = .lead
         setBorder(button: leadButton)
     }
     
-    func setDrum() {
+    @objc func setDrum() {
         mainScene.shapeType = .drums
         setBorder(button: drumButton)
     }
     
-    func setBarrier() {
+    @objc func setBarrier() {
         mainScene.shapeType = .barrier
         setBorder(button: barrierButton)
     }
@@ -183,7 +184,7 @@ public class ControlBar: UIView {
     }
     
     /// Checks if the mainScene is in a paused or play state and sets it appropriately.
-    func pausePlay() {
+    @objc func pausePlay() {
         
         let image = UIImage(named: mainScene.isPaused ? "pause" : "play")!
         let highlightImage = UIImage(named: mainScene.isPaused ? "pauseHighlight" : "playHighlight")
@@ -194,17 +195,17 @@ public class ControlBar: UIView {
     }
     
     /// Removes all nodes from mainScene.
-    func clearAll() {
+    @objc func clearAll() {
         mainScene.removeAllChildren()
     }
     
     /// Called each time the tempo slider's value is changed, this function changes the speed of mainScene.
-    func changeTempo() {
+    @objc func changeTempo() {
         mainScene.physicsWorld.speed = CGFloat(tempoSlider.value)
     }
     
     /// Resets mainScene's speed to its defaut state. 
-    func tempoReset() {
+    @objc func tempoReset() {
         tempoSlider.value = 1
         mainScene.physicsWorld.speed = 1
     }

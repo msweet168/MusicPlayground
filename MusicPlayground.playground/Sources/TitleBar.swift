@@ -44,7 +44,7 @@ public class TitleBar: UIView {
     }
     
     /// Function which sets IntroView's alpha to 1 so it is visable.
-    func infoScreen() {
+    @objc func infoScreen() {
         UIView.animate(withDuration: 0.5, animations: {
             self.intro.alpha = 1
         })
