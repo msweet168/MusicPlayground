@@ -16,10 +16,10 @@ public class Interface: SKScene, SKPhysicsContactDelegate {
     func setUpPhysics() {
         let body = SKPhysicsBody(edgeLoopFrom: frame)
         body.categoryType = .scene
+        body.linearDamping = 0.0
+        body.restitution = 0
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
-        physicsBody?.restitution = 0
-        physicsBody?.linearDamping = 0.0
         physicsBody = body
     }
 
